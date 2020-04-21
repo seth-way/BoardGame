@@ -4,7 +4,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
 import {
-  checkFreeSpaces, checkAttackForward, checkAttackBackward, attackForward, attackBackward,
+  checkFreeSpaces,
+  checkAttackForward,
+  checkAttackBackward,
+  attackForward,
+  attackBackward,
+  getRemainingPieces,
 } from '../gameLogic/helperFunctions';
 
 ReactDOM.render(
@@ -14,5 +19,6 @@ ReactDOM.render(
     checkAttackBackward={checkAttackBackward}
     attackForward={attackForward}
     attackBackward={attackBackward}
+    getRemainingPieces={getRemainingPieces}
   />, document.getElementById('App'),
 );

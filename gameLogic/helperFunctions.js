@@ -56,7 +56,6 @@ module.exports = {
     const change = cardinalDirections[direction];
     row += change[0];
     column += change[1];
-    console.log('row', row, 'column', column, 'change', change);
     // eslint-disable-next-line no-shadow
     const attack = (board, row, column) => {
       if (Object.keys(board[row][column].moves).includes(direction.toString())) {
@@ -90,5 +89,20 @@ module.exports = {
     };
     attack(board, row, column);
     return board;
+  },
+  getRemainingPieces(board) {
+    let player1 = 0;
+    let player2 = 0;
+    for (let i = 0; i < board.length; i += 1) {
+      for (let j = 0; j < board[i].length; j += 1) {
+        if (board[i][j].value === 1) {
+          player1 += 1;
+        }
+        if (board[i][j].value === -1) {
+          player2 += 1;
+        }
+      }
+    }
+    return [player1, player2];
   },
 };
