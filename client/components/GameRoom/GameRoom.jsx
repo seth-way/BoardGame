@@ -16,18 +16,18 @@ const GameRoom = (props) => {
   } = props;
   const renderPlayerInfo = () => (player === whosTurn
     ? (
-      <h3 id="yourTurn">
+      <h2 id="yourTurn">
         Your Turn Player
         {' '}
         {player === 1 ? '1' : '2'}
-      </h3>
+      </h2>
     )
     : (
-      <h3 id="waiting">
+      <h2 id="waiting">
         Waiting On Player
         {' '}
         {player === 1 ? '2' : '1'}
-      </h3>
+      </h2>
     ));
   const renderRemainingPieces = () => {
     const remainingPieces = getRemainingPieces(board);
@@ -40,18 +40,21 @@ const GameRoom = (props) => {
     return (
       <div>
         <h3>Remaining Pieces</h3>
-        <span>
-          {' '}
-          Player 1:
-          {' '}
-          {remainingPieces[0]}
-        </span>
-        <span>
-          {' '}
-          Player 2:
-          {' '}
-          {remainingPieces[1]}
-        </span>
+        <h3>
+          <span>
+            {' '}
+            Player 1:
+            {' '}
+            {remainingPieces[0]}
+            {' '}
+          </span>
+          <span>
+            --------
+            Player 2:
+            {' '}
+            {remainingPieces[1]}
+          </span>
+        </h3>
       </div>
     );
   };
@@ -63,7 +66,7 @@ const GameRoom = (props) => {
       <div>
         <Board board={board} handleSelectCell={handleSelectCell} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />
       </div>
-      <div>
+      <div id="roomID">
         Room ID:
         {'  '}
         {_id}

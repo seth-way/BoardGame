@@ -4,6 +4,15 @@ body {
     justify-content: center;
 }
 
+h3 {
+  text-align: center;
+}
+
+h2 {
+  justify-content: center;
+  text-align: center;
+}
+
 .gameRoomContainer {
   background-color: white;
   border: thick solid lightblue;
@@ -81,18 +90,34 @@ body {
 }
 
 #yourTurn {
+  text-align: center;
   background-color: lightgreen;
   justify-content: center;
   justify-self: center;
+  padding: 20px;
+  margin-left: 30%;
+  margin-right: 30%;
+  border-radius: 10px;
+  border: thick solid green;
 }
 
 #waiting {
+  text-align: center;
   background-color: lightyellow;
   justify-content: center;
   justify-self: center;
+  padding: 20px;
+  margin-left: 30%;
+  margin-right: 30%;
+  border-radius: 10px;
+  border: thick solid yellow;
 }
 
 #hovered {
   border: 3px solid red;
   border-radius: 125px;
+}
+
+#roomID {
+  text-align: right;
 }
