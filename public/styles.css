@@ -91,3 +91,8 @@ body {
   justify-content: center;
   justify-self: center;
 }
+
+#hovered {
+  border: 3px solid red;
+  border-radius: 125px;
+}

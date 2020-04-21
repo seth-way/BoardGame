@@ -28,12 +28,15 @@ class App extends React.Component {
     this.checkAttackBackward = props.checkAttackBackward;
     this.attackForward = props.attackForward;
     this.attackBackward = props.attackBackward;
+    this.getRemainingPieces = props.getRemainingPieces;
     this.handleCreateRoom = this.handleCreateRoom.bind(this);
     this.handleJoinRoom = this.handleJoinRoom.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.waitForTurn = this.waitForTurn.bind(this);
     this.checkFreeSpaces = this.checkFreeSpaces.bind(this);
     this.handleSelectCell = this.handleSelectCell.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
   componentDidMount() {
@@ -112,26 +115,14 @@ class App extends React.Component {
       // if move is available....
       } else if (availableMoves.some(ele => (ele[0] === cell[0] && ele[1] === cell[1]))) {
         // check attacks forward and backward
-        /*
-        const dir = availableMoves.map((ele) => {
-          if (ele[0] === cell[0] && ele[1] === cell[1]) {
-            return ele[2];
-          }
-        });
-        */
-        console.log('moves', availableMoves);
         let dir;
-        console.log('cell', cell);
         for (let i = 0; i < availableMoves.length; i += 1) {
-          console.log('i ', i, 'i@0 ', i[0], 'i@1 ', i[1]);
           if (availableMoves[i][0] === cell[0] && availableMoves[i][1] === cell[1]) {
-            console.log('i@2 ', availableMoves[i][2]);
             // eslint-disable-next-line prefer-destructuring
             dir = availableMoves[i][2];
             break;
           }
         }
-        console.log('dir ', dir);
         const f = this.checkAttackForward(player, selected[0], selected[1], board, dir);
         const b = this.checkAttackBackward(player, selected[0], selected[1], board, dir);
         if (b && f) {
@@ -164,7 +155,6 @@ class App extends React.Component {
               // eslint-disable-next-line no-alert
               alert(`Error Retreiving Game ${_id}`);
             } else {
-              console.log('data ->', data);
               const newBoard = data.board;
               const newWhosTurn = data.whosTurn;
               this.setState({
@@ -178,6 +168,24 @@ class App extends React.Component {
       }
     }
     event.preventDefault();
+  }
+
+  handleMouseEnter(event) {
+    // Element.setAttribute(name, value);
+    const { board, player } = this.state;
+    // check if its your turn
+    const row = parseInt(event.target.getAttribute('row'), 10);
+    const column = parseInt(event.target.getAttribute('column'), 10);
+    const value = parseInt(event.target.getAttribute('value'), 10);
+    const freeSpaces = this.checkFreeSpaces(row, column, board);
+    // if no cell has been chosen
+    if (freeSpaces && value === player) {
+      event.target.setAttribute('id', 'hovered');
+    }
+  }
+
+  handleMouseLeave(event) {
+    event.target.setAttribute('id', '');
   }
 
   waitForTurn() {
@@ -227,6 +235,9 @@ class App extends React.Component {
         whosTurn={whosTurn}
         waitForTurn={this.waitForTurn}
         handleSelectCell={this.handleSelectCell}
+        handleMouseEnter={this.handleMouseEnter}
+        handleMouseLeave={this.handleMouseLeave}
+        getRemainingPieces={this.getRemainingPieces}
       />
     );
   }

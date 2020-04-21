@@ -3,7 +3,7 @@ import React from 'react';
 
 const Cell = (props) => {
   const {
-    cell, row, column, handleSelectCell,
+    cell, row, column, handleSelectCell, handleMouseEnter, handleMouseLeave,
   } = props;
   const player = {
     1: 'playerOne',
@@ -16,6 +16,8 @@ const Cell = (props) => {
       className={className}
       role="button"
       onClick={handleSelectCell}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       tabIndex={0}
       onKeyPress={handleSelectCell}
       row={row}
