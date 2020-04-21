@@ -1,7 +1,18 @@
+/* eslint-disable import/extensions */
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import path from 'path';
-// eslint-disable-next-line import/extensions
-import GameRoom from './components/GameRoom.jsx';
+import App from './components/App.jsx';
+import {
+  checkFreeSpaces, checkAttackForward, checkAttackBackward, attackForward, attackBackward,
+} from '../gameLogic/helperFunctions';
 
-ReactDOM.render(<GameRoom roomID={path.basename(window.document.URL)} />, document.getElementById('gameRoom'));
+ReactDOM.render(
+  <App
+    checkFreeSpaces={checkFreeSpaces}
+    checkAttackForward={checkAttackForward}
+    checkAttackBackward={checkAttackBackward}
+    attackForward={attackForward}
+    attackBackward={attackBackward}
+  />, document.getElementById('App'),
+);

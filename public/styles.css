@@ -1,0 +1,79 @@
+body {
+    background-color: grey;
+    display: flex;
+    justify-content: center;
+}
+
+.gameRoomContainer {
+  background-color: white;
+  border: thick solid lightblue;
+  border-radius: 15px;
+  padding: 20px;
+  margin-top:20px;
+}
+
+.gameBoard {
+  display: flex;
+  border: thick solid burlywood;
+  border-radius: 15px;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 500px;
+  width: 900px;
+  background-image: url("./resources/board.png");
+  background-size: contain;
+}
+
+.gameRow {
+  display: flex;
+  justify-content: space-around;
+  height: 18%;
+}
+
+.gameCell {
+  height: 90%;
+  width: 9%;
+  margin: 7px;
+  outline: none;
+}
+
+.selected {
+  border: 10px solid lightblue !important;
+  border-radius: 125px;
+}
+
+.playerOne {
+  background-image: url("./resources/white-stone-texture.jpg");
+  border: thick solid burlywood;
+  border-radius: 125px;
+}
+
+.playerTwo {
+  background-image: url("./resources/dark-stone-texture.jpeg");
+  border: thick solid burlywood;
+  border-radius: 125px;
+}
+
+.form-group {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  margin-top: 50px;
+  border: thick solid lightblue;
+  border-radius: 15px;
+}
+
+.formButton {
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+#password {
+    margin-left: 15px;
+    border-radius: 5px;
+}
