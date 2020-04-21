@@ -28,7 +28,12 @@ module.exports = {
 
   checkAttackForward(player, row, column, board, direction) {
     const change = cardinalDirections[direction];
-    if (board[row + (change[0] * 2)][column + (change[1] * 2)].value === player * -1) {
+    const checkRow = row + change[0] * 2;
+    const checkColumn = column + change[1] * 2;
+    if (checkRow < 0 || checkColumn < 0 || checkRow > 4 || checkColumn > 8) {
+      return false;
+    }
+    if (board[checkRow][checkColumn].value === -player) {
       return true;
     }
     return false;
@@ -36,7 +41,12 @@ module.exports = {
 
   checkAttackBackward(player, row, column, board, direction) {
     const change = cardinalDirections[direction];
-    if (board[row + -change[0]][column + -change[1]].value === player * -1) {
+    const checkRow = row + -change[0];
+    const checkColumn = column + -change[1];
+    if (checkRow < 0 || checkColumn < 0 || checkRow > 4 || checkColumn > 8) {
+      return false;
+    }
+    if (board[checkRow][checkColumn].value === -player) {
       return true;
     }
     return false;
@@ -63,15 +73,19 @@ module.exports = {
   },
   attackBackward(player, row, column, board, direction) {
     const change = cardinalDirections[direction];
-    change[0] *= -1;
-    change[1] *= -1;
+    const changeRow = change[0] * -1;
+    const changeColumn = change[1] * -1;
     // eslint-disable-next-line no-shadow
     const attack = (board, row, column) => {
-      if (board[row + change[0]][column + change[1]].value === player * -1) {
-        board[row + change[0]][column + change[1]].value = 0;
-        row += change[0];
-        column += change[1];
-        attack(board, row, column);
+      const attackRow = row + changeRow;
+      const attackColumn = column + changeColumn;
+      if (board[attackRow][attackColumn]) {
+        if (board[attackRow][attackColumn].value === -player) {
+          board[attackRow][attackColumn].value = 0;
+          row += changeRow;
+          column += changeColumn;
+          attack(board, row, column);
+        }
       }
     };
     attack(board, row, column);

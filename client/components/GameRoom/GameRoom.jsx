@@ -13,14 +13,14 @@ const GameRoom = (props) => {
   } = props;
   const renderPlayerInfo = () => (player === whosTurn
     ? (
-      <h3>
+      <h3 id="yourTurn">
         Your Turn Player
         {' '}
         {player === 1 ? '1' : '2'}
       </h3>
     )
     : (
-      <h3>
+      <h3 id="waiting">
         Waiting On Player
         {' '}
         {player === 1 ? '2' : '1'}

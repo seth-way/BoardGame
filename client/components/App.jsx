@@ -68,8 +68,8 @@ class App extends React.Component {
         _id,
         whosTurn,
       });
+      this.waitForTurn();
     });
-    this.waitForTurn();
     event.preventDefault();
   }
 
@@ -106,44 +106,75 @@ class App extends React.Component {
       // deselect if same cell is chosen
       } else if (selected[0] === row && selected[1] === column) {
         event.target.setAttribute('class', className.slice(0, className.lastIndexOf(' ')));
-        this.setState({ selected: [], availableMoves: [] });
+        selected.splice(0, selected.length);
+        availableMoves.splice(0, availableMoves.length);
+        this.setState({ selected, availableMoves });
       // if move is available....
       } else if (availableMoves.some(ele => (ele[0] === cell[0] && ele[1] === cell[1]))) {
         // check attacks forward and backward
+        /*
         const dir = availableMoves.map((ele) => {
           if (ele[0] === cell[0] && ele[1] === cell[1]) {
             return ele[2];
           }
         });
-        console.log('die ', dir);
-        const f = this.checkAttackForward(player, selected[0], selected[1], board, dir[0]);
-        const b = this.checkAttackBackward(player, selected[0], selected[1], board, dir[0]);
+        */
+        console.log('moves', availableMoves);
+        let dir;
+        console.log('cell', cell);
+        for (let i = 0; i < availableMoves.length; i += 1) {
+          console.log('i ', i, 'i@0 ', i[0], 'i@1 ', i[1]);
+          if (availableMoves[i][0] === cell[0] && availableMoves[i][1] === cell[1]) {
+            console.log('i@2 ', availableMoves[i][2]);
+            // eslint-disable-next-line prefer-destructuring
+            dir = availableMoves[i][2];
+            break;
+          }
+        }
+        console.log('dir ', dir);
+        const f = this.checkAttackForward(player, selected[0], selected[1], board, dir);
+        const b = this.checkAttackBackward(player, selected[0], selected[1], board, dir);
         if (b && f) {
-          console.log('a dilema');
+          board = this.attackForward(player, selected[0], selected[1], board, dir);
+          board = this.attackBackward(player, selected[0], selected[1], board, dir);
         } else if (f) {
-          board = this.attackForward(player, selected[0], selected[1], board, dir[0]);
+          board = this.attackForward(player, selected[0], selected[1], board, dir);
         } else if (b) {
-          board = this.attackBackward(player, selected[0], selected[1], board, dir[0]);
+          board = this.attackBackward(player, selected[0], selected[1], board, dir);
         }
         // move piece
         board[selected[0]][selected[1]].value = 0;
         board[row][column].value = player;
         whosTurn *= -1;
+        selected.splice(0, selected.length);
+        availableMoves.splice(0, availableMoves.length);
         this.setState({
           board,
-          selected: [],
-          availableMoves: [],
+          selected,
+          availableMoves,
           whosTurn,
         });
-        updateRoom(_id, { board, whosTurn }, (err, response) => {
+        updateRoom(_id, { board, whosTurn }, (err) => {
           if (err) {
             // eslint-disable-next-line no-alert
             alert(`Error Retreiving Game ${_id}`);
           }
-          console.log(response);
+          refreshRoom(_id, (err2, data) => {
+            if (err2) {
+              // eslint-disable-next-line no-alert
+              alert(`Error Retreiving Game ${_id}`);
+            } else {
+              console.log('data ->', data);
+              const newBoard = data.board;
+              const newWhosTurn = data.whosTurn;
+              this.setState({
+                board: newBoard,
+                whosTurn: newWhosTurn,
+              });
+            }
+            this.waitForTurn();
+          });
         });
-        refreshRoom();
-        this.waitForTurn();
       }
     }
     event.preventDefault();

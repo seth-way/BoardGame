@@ -38,20 +38,22 @@ body {
 }
 
 .selected {
-  border: 10px solid lightblue !important;
+  border: thick solid lightblue !important;
   border-radius: 125px;
 }
 
 .playerOne {
-  background-image: url("./resources/white-stone-texture.jpg");
+  background-color: lightgoldenrodyellow;
   border: thick solid burlywood;
   border-radius: 125px;
+  background-image: linear-gradient(lightgoldenrodyellow, darkkhaki);
 }
 
 .playerTwo {
-  background-image: url("./resources/dark-stone-texture.jpeg");
+  background-color: darkslategray;
   border: thick solid burlywood;
   border-radius: 125px;
+  background-image: linear-gradient(darkslategray, black);
 }
 
 .form-group {
@@ -74,6 +76,18 @@ body {
 }
 
 #password {
-    margin-left: 15px;
-    border-radius: 5px;
+  margin-left: 15px;
+  border-radius: 5px;
+}
+
+#yourTurn {
+  background-color: lightgreen;
+  justify-content: center;
+  justify-self: center;
+}
+
+#waiting {
+  background-color: lightyellow;
+  justify-content: center;
+  justify-self: center;
 }
