@@ -18,7 +18,7 @@ h2 {
   border: thick solid lightblue;
   border-radius: 15px;
   padding: 20px;
-  margin-top:20px;
+  margin-top: 15%;
 }
 
 .gameBoard {
@@ -65,23 +65,34 @@ h2 {
   background-image: linear-gradient(darkslategray, black);
 }
 
+.form-container {
+  width: 55%;
+}
+
 .form-group {
   background-color: white;
   display: flex;
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
   padding: 10px;
-  margin-top: 50px;
+  margin-top: 15%;
   border: thick solid lightblue;
   border-radius: 15px;
+  width: 100%;
+  margin-left: 33%;
+  margin-right: 33%;
 }
 
 .formButton {
   display: flex;
   justify-content: center;
   border-radius: 5px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
 }
 
 #password {
@@ -120,4 +131,12 @@ h2 {
 
 #roomID {
   text-align: right;
+}
+
+#App {
+  width: 952px;
+}
+
+#header {
+  text-align: center;
 }
