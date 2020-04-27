@@ -23,3 +23,4 @@ npm start
 ```
 
 ### Gameplay
+![gameplay](https://media.giphy.com/media/kHNt0fBp3B6mq2Y9eG/giphy.gif)
