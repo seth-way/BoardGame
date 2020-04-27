@@ -9,11 +9,12 @@ import React from 'react';
 const Lobby = (props) => {
   const { handleCreateRoom, handleJoinRoom, handleInputChange } = props;
   return (
-    <div>
+    <div className="form-container">
       <div className="form-group">
         <form onSubmit={handleCreateRoom}>
-          <div>
-            <input className="formButton" type="submit" value="Create New Room" />
+          <h2>Create A New Room</h2>
+          <div className="buttonContainer">
+            <input className="formButton" type="submit" value="Create" />
           </div>
         </form>
       </div>
@@ -34,9 +35,9 @@ const Lobby = (props) => {
               <option value="-1">Player 2</option>
             </select>
           </span>
-          <span>
-            <input className="formButton" type="submit" value="Join Room" />
-          </span>
+          <div className="buttonContainer">
+            <input className="formButton" type="submit" value="Join" />
+          </div>
         </form>
       </div>
     </div>
